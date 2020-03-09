@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_2_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动 -->
+	<context id="egoTables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			
+			connectionURL="jdbc:mysql://192.168.1.120:3306/zjlp?characterEncoding=utf-8" userId="root"  password="111111">
+		<!-- userId="yusanshop"	password="M7r3Nt5cdBw7Zt22" -->
+		</jdbcConnection>
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.gzwl.zjlp.pojo.readhouserecord" targetProject="src">
+		<!-- <javaModelGenerator targetPackage="com.gzwl.pojo" targetProject="src"> -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="com.gzwl.zjlp.mapper.readhouserecord" targetProject="src" />
+		<!-- <sqlMapGenerator targetPackage="com.gzwl.mapper" targetProject="src" /> -->
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.gzwl.zjlp.dao.readhouserecord" targetProject="src" />
+		<!-- <javaClientGenerator type="XMLMAPPER" targetPackage="com.gzwl.dao" targetProject="src" /> -->
+		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
+		<table tableName="read_house_record"></table>
+		<!-- <table tableName="admin_info"></table>
+		<table tableName="department"></table>
+		<table tableName="dictionary_type"></table>
+		<table tableName="dictionary"></table>
+		<table tableName="job"></table>
+		<table tableName="role"></table>
+		<table tableName="role_menu"></table>
+		<table tableName="menu"></table> -->
+		<!-- <table tableName="material_in"></table> -->
+		<!-- <table tableName="product_out"></table> -->
+		<!-- <table tableName="purchase"></table> -->
+		<!-- <table tableName="yusan_sys_store"></table>
+		<table tableName="yusan_store_joinin"></table> -->
+		<!-- <table tableName="material"></table> -->
+		<!-- <table tableName="warehouse"></table> -->
+		<!-- <table tableName="warehouse_in"></table> -->
+		<!-- <table tableName="warehouse_out"></table> -->
+		<!-- <table tableName="supplier"></table> -->
+	</context>
+</generatorConfiguration>  

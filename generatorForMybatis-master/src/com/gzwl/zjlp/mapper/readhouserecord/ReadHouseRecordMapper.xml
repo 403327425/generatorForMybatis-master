@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzwl.zjlp.dao.readhouserecord.ReadHouseRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecord" >
+    <id column="read_house_record_id" property="readHouseRecordId" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="house_id" property="houseId" jdbcType="VARCHAR" />
+    <result column="salesperson_id" property="salespersonId" jdbcType="VARCHAR" />
+    <result column="intention" property="intention" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="read_house_time" property="readHouseTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="editor_id" property="editorId" jdbcType="INTEGER" />
+    <result column="editor_time" property="editorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    read_house_record_id, customer_id, house_id, salesperson_id, intention, remark, read_house_time, 
+    status, create_id, create_time, editor_id, editor_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from read_house_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from read_house_record
+    where read_house_record_id = #{readHouseRecordId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from read_house_record
+    where read_house_record_id = #{readHouseRecordId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecordExample" >
+    delete from read_house_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecord" >
+    insert into read_house_record (read_house_record_id, customer_id, house_id, 
+      salesperson_id, intention, remark, 
+      read_house_time, status, create_id, 
+      create_time, editor_id, editor_time
+      )
+    values (#{readHouseRecordId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{houseId,jdbcType=VARCHAR}, 
+      #{salespersonId,jdbcType=VARCHAR}, #{intention,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{readHouseTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{createId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editorId,jdbcType=INTEGER}, #{editorTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecord" >
+    insert into read_house_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="readHouseRecordId != null" >
+        read_house_record_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="houseId != null" >
+        house_id,
+      </if>
+      <if test="salespersonId != null" >
+        salesperson_id,
+      </if>
+      <if test="intention != null" >
+        intention,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="readHouseTime != null" >
+        read_house_time,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="editorId != null" >
+        editor_id,
+      </if>
+      <if test="editorTime != null" >
+        editor_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="readHouseRecordId != null" >
+        #{readHouseRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        #{houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="salespersonId != null" >
+        #{salespersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="intention != null" >
+        #{intention,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readHouseTime != null" >
+        #{readHouseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editorId != null" >
+        #{editorId,jdbcType=INTEGER},
+      </if>
+      <if test="editorTime != null" >
+        #{editorTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecordExample" resultType="java.lang.Integer" >
+    select count(*) from read_house_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update read_house_record
+    <set >
+      <if test="record.readHouseRecordId != null" >
+        read_house_record_id = #{record.readHouseRecordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseId != null" >
+        house_id = #{record.houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salespersonId != null" >
+        salesperson_id = #{record.salespersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intention != null" >
+        intention = #{record.intention,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readHouseTime != null" >
+        read_house_time = #{record.readHouseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.editorId != null" >
+        editor_id = #{record.editorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.editorTime != null" >
+        editor_time = #{record.editorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update read_house_record
+    set read_house_record_id = #{record.readHouseRecordId,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=VARCHAR},
+      house_id = #{record.houseId,jdbcType=VARCHAR},
+      salesperson_id = #{record.salespersonId,jdbcType=VARCHAR},
+      intention = #{record.intention,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      read_house_time = #{record.readHouseTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      create_id = #{record.createId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      editor_id = #{record.editorId,jdbcType=INTEGER},
+      editor_time = #{record.editorTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecord" >
+    update read_house_record
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="houseId != null" >
+        house_id = #{houseId,jdbcType=VARCHAR},
+      </if>
+      <if test="salespersonId != null" >
+        salesperson_id = #{salespersonId,jdbcType=VARCHAR},
+      </if>
+      <if test="intention != null" >
+        intention = #{intention,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="readHouseTime != null" >
+        read_house_time = #{readHouseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editorId != null" >
+        editor_id = #{editorId,jdbcType=INTEGER},
+      </if>
+      <if test="editorTime != null" >
+        editor_time = #{editorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where read_house_record_id = #{readHouseRecordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gzwl.zjlp.pojo.readhouserecord.ReadHouseRecord" >
+    update read_house_record
+    set customer_id = #{customerId,jdbcType=VARCHAR},
+      house_id = #{houseId,jdbcType=VARCHAR},
+      salesperson_id = #{salespersonId,jdbcType=VARCHAR},
+      intention = #{intention,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      read_house_time = #{readHouseTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      create_id = #{createId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      editor_id = #{editorId,jdbcType=INTEGER},
+      editor_time = #{editorTime,jdbcType=TIMESTAMP}
+    where read_house_record_id = #{readHouseRecordId,jdbcType=VARCHAR}
+  </update>
+</mapper>
