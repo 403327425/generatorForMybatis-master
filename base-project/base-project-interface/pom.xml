@@ -6,4 +6,21 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>base-project-interface</artifactId>
+  <name>base-interface</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency> 
+    	<groupId>com.base</groupId>
+    	<artifactId>base-project-pojo</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 </project>

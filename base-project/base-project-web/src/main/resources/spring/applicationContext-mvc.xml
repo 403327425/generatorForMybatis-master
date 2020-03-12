@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" 
+    xmlns:util="http://www.springframework.org/schema/util" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/util 
+    	http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	<context:component-scan base-package="com.base.controller">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	<!-- 配置标签使springmvc注解生效 -->
+   <!--  <aop:aspectj-autoproxy/>  -->
+   <bean id="myConversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.base.commons.StringToDateConverter"/>
+			</list>
+		</property>
+	</bean>
+    <mvc:annotation-driven conversion-service="myConversionService">
+    	<mvc:message-converters>
+<!--         <bean class="org.springframework.http.converter.ResourceHttpMessageConverter" >
+        </bean> -->
+        <bean class="org.springframework.http.converter.StringHttpMessageConverter" >
+         <property name="supportedMediaTypes">
+            <list>
+              <value>text/html;charset=UTF-8</value>
+              <value>application/json;charset=UTF-8</value>
+              <value>text/plain;charset=UTF-8</value>
+			  <value>application/xml;charset=UTF-8</value>
+            </list> 
+         </property>
+        </bean>
+    </mvc:message-converters>
+    </mvc:annotation-driven>
+    <aop:aspectj-autoproxy proxy-target-class="true" />  
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!--/WEB-INF/page/index.jsp  -->
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/console/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1" />
+	</bean>
+	<mvc:default-servlet-handler></mvc:default-servlet-handler>
+	<!-- 资源映射 -->
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/image/" mapping="/image/**" />
+	<mvc:resources location="/layuiadmin/"
+		mapping="/layuiadmin/**" />
+	<aop:config proxy-target-class="true"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/js/**" />
+			<mvc:exclude-mapping path="/css/**" />
+			<mvc:exclude-mapping path="/image/**" />
+			<mvc:exclude-mapping path="/layuiadmin/**" />
+			<mvc:exclude-mapping path="/browse/**" />
+			<mvc:exclude-mapping path="/user/login" />
+			<mvc:exclude-mapping path="/user/checklogin" />
+			<mvc:exclude-mapping path="/loginOut" />
+			<mvc:exclude-mapping path="/user/forgetView" />
+			<mvc:exclude-mapping path="/user/sessionOut" />  
+			<mvc:exclude-mapping path="/iclock/**" />
+			<mvc:exclude-mapping path="/borrowRecord/toInsert" />
+			<bean class="com.base.interceptor.SystemSessionInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- 开启shiro注解支持 -->
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>	
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    <property name="exceptionMappings">
+        <props>
+            <prop key="org.apache.shiro.authz.AuthorizationException">redirect:/404.html</prop>  
+            <prop key="org.apache.shiro.authz.UnauthorizedException">redirect:/404.html</prop>
+        </props>
+    </property>
+</bean>
+	<!-- 定义文件上传解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 	设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="52428800"></property>
+	</bean>
+	<!-- <bean
+        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <util:list id="beanList">
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </util:list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter"
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean> -->
+</beans>

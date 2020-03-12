@@ -6,4 +6,88 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>base-project-commons</artifactId>
+  <name>base-commons</name>
+  
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>net.sf.barcode4j</groupId>
+		<artifactId>barcode4j-light</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-core</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<scope>provided</scope>
+	</dependency>
+
+	<dependency>
+		<groupId>commons-net</groupId>
+		<artifactId>commons-net</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+	</dependency>
+	 <dependency>
+           <groupId>net.sf.json-lib</groupId>
+           <artifactId>json-lib</artifactId>
+           <classifier>jdk15</classifier>
+       </dependency>
+	<dependency>
+     <groupId>com.alibaba</groupId>
+     <artifactId>fastjson</artifactId>
+   	</dependency>
+   	<!-- redis -->
+	<dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+	</dependency>
+	<dependency>
+           <groupId>org.springframework.data</groupId>
+           <artifactId>spring-data-redis</artifactId>
+    	</dependency>
+    	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-web</artifactId>
+	</dependency> <!-- spring-webmvc -->
+	<dependency>
+	    <groupId>org.jsoup</groupId>
+	    <artifactId>jsoup</artifactId>
+	    <version>1.12.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+	</dependency>
+  </dependencies>
 </project>

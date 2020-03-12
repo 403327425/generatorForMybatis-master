@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans      
+                        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd      
+                        http://www.springframework.org/schema/context      
+                        http://www.springframework.org/schema/context/spring-context-4.2.xsd      
+                        http://www.springframework.org/schema/mvc      
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd  
+                        http://www.springframework.org/schema/cache   
+                        http://www.springframework.org/schema/cache/spring-cache-4.2.xsd">
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:redis.properties" />
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="${redis.maxIdle}" />
+		<property name="maxTotal" value="${redis.maxTotal}" />
+		<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+		<property name="minEvictableIdleTimeMillis"
+			value="${redis.minEvictableIdleTimeMillis}" />
+		<property name="numTestsPerEvictionRun"
+			value="${redis.numTestsPerEvictionRun}" />
+		<property name="timeBetweenEvictionRunsMillis"
+			value="${redis.timeBetweenEvictionRunsMillis}" />
+		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
+		<property name="testWhileIdle" value="${redis.testWhileIdle}" />
+	</bean>	
+	 <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+        <constructor-arg name="host" value="${redis.hostName}"></constructor-arg>
+        <constructor-arg name="port" value="${redis.port}"></constructor-arg>
+        <constructor-arg name="timeout" value="${redis.timeout}"></constructor-arg>
+        <constructor-arg name="password" value="${redis.password}"></constructor-arg>
+    </bean>
+	<bean id="jedisClientPool" class="com.base.commons.jedis.JedisClientPool">
+		<property name="jedisPool" ref="jedisPool" />
+	</bean>
+
+</beans>
