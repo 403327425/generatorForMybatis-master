@@ -1,0 +1,51 @@
+@charset "utf-8";
+body{ padding:0px; margin:0px auto; font-family:Microsoft YaHei,arial,'微软雅黑'; font-size:14px; line-height:24px; color:#333; width:100%; zoom:1; overflow-x:hidden;-webkit-text-size-adjust:none; -webkit-tap-codearea-color:rgba(0,0,0,0); -webkit-tap-codearea:rgba(0,0,0,0); -webkit-font-smoothing:antialiased;}
+ul,li,form,dl,dt,dd,div,p,h1,h2,h3,h4,h5,h6{ padding:0px; margin:0px;}
+ul,li{ list-style:none; margin:0;}
+select,input,textarea{ border-radius:0; -webkit-border-radius:0; color:#333;}
+input:focus{ outline:none;}
+input,button,select,textarea{ outline:none; font-family:Microsoft YaHei,arial,'微软雅黑';}
+textarea{ resize:none;}
+textarea,input,select{ background:none; border:none; margin:0; padding:0;}
+audio,canvas,progress,video{ display:inline-block; vertical-align:baseline;}
+article,aside,footer,header,hgroup,nav,section,figure,figcaption{ display:block;}
+figure,figcaption{ margin:0px; padding:0px;}
+img{ border:none; border:0; max-width:100%; vertical-align:top;}
+a{ color:#333; text-decoration:none;}
+a:focus{ outline:none; -moz-outline:none; text-decoration:none;}
+a:hover{ text-decoration:none;}
+*{ box-sizing: border-box; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+.am,
+.am *{ transition: all 0.4s ease 0s;-o-transition: all 0.4s ease 0s;-moz-transition: all 0.4s ease 0s;-webkit-transition: all 0.4s ease 0s;}
+.w0{ width: 0;}
+.w100 {width: 100%;}
+.clear{ clear: both; height: 0; overflow: hidden;}
+.hidden{overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.fl{ float: left;}
+.fr{ float: right;}
+
+
+
+.loginBox{ height: 100vh; display: flex; align-items: center; justify-content: center; background: #f2f2f2; padding: 10px;}
+.loginBox .box{ background: #fff; border: 5px solid #eee; max-width: 100%; width: 410px; padding: 25px;}
+.loginBox .box .title{ font-size: 24px; text-align: center;}
+.loginBox .box ul{ padding: 30px 0;}
+.loginBox .box li + li{ margin-top: 15px;}
+.loginBox .box li input{ display: block; width: 100%; line-height: 20px; height: 40px; border: 1px solid #ddd; padding: 9px 10px; font-size: 14px;}
+.loginBox .box li .btn{ line-height: 40px; text-align: center; color: #fff; background: #009688; display: block;}
+
+
+.editBox ul{ padding: 30px 25px;}
+.editBox ul li{ display: flex; align-items: center; font-size: 14px; color: #666; padding: 5px 0;}
+.editBox ul li.b{ color: #333;}
+.editBox ul li.b .left{ font-weight: bold;}
+.editBox ul li.tl{ border-top: 1px solid #ddd; padding: 0; margin: 15px 0;}
+.editBox ul li .left{ flex: 0 0 auto; width: 8em; font-size: 15px}
+.editBox ul li .left i{ display: inline-block; width: 0.5em;}
+.editBox ul li .right{ width: 100%;}
+.editBox ul li .right input,
+.editBox ul li .right select{ width: 100%; border: 1px solid #ddd; height: 40px; line-height: 20px; padding: 9px 10px; font-size: 14px;}
+.editBox ul li .btn{ line-height: 40px; text-align: center; color: #fff; background: #009688; display: block; width: 100%;}
+
+.msgBox{ position: fixed; left: 0; top: 0; right: 0; bottom: 0; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.5); z-index: 500;}
+.msgBox .box{ color: #fff; max-width: 90%; text-align: center; background: #000; border-radius: 5px; padding: 5px 15px;}

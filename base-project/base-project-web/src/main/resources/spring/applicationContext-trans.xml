@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xml-body>
+
 
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -58,4 +58,3 @@
         pointcut-ref="druid-stat-pointcut" />
 </aop:config>
 </beans>
-</xml-body>

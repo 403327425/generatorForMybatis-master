@@ -1,0 +1,78 @@
+
+
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+.mr5{
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.search-wrap p{
+   line-height: 38px;
+}
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}
+.hidden {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	/* for IE */
+	-o-text-overflow: ellipsis;
+	/* for Opera */
+	-icab-text-overflow: ellipsis;
+	/* for iCab */
+	-khtml-text-overflow: ellipsis;
+	/* for Konqueror Safari */
+	-moz-text-overflow: ellipsis;
+	/* for Firefox,mozilla */
+	-webkit-text-overflow: ellipsis;
+	/* for Safari,Swift*/
+}
+
+.art_con{
+    padding-top: 12px;
+}
+.art_con .tit{
+    text-align: center;
+    font-size: 30px;
+    color: #333;
+    line-height: 1.8;
+}
+.art_con .txt{
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+.art_con .txt span{
+    padding: 0 12px;
+}
+.art_con .txt span a{
+	color:#297ce6;
+}
+.art_con .txt span a:hover{
+	color:#red;
+}
+.art_con .content{
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+    padding: 30px 0 60px;
+    line-height: 1.8;
+    text-align: justify;
+}
+.art_con .content img{
+    max-width: 100%;
+}
+.w_300 .layui-form-item .layui-input-inline{
+	width:300px;
+}
+.w_500 .layui-form-item .layui-input-inline{
+	width:500px;
+}
+.padding_top{
+    padding-top: 10px;
+}

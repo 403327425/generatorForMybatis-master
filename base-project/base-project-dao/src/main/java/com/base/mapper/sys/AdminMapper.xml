@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.dao.sys.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.base.pojo.sys.Admin" >
+    <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+    <result column="admin_login_name" property="adminLoginName" jdbcType="VARCHAR" />
+    <result column="admin_login_password" property="adminLoginPassword" jdbcType="VARCHAR" />
+    <result column="admin_nick_name" property="adminNickName" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="admin_status" property="adminStatus" jdbcType="BIT" />
+     <result column="open_id" property="openId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="customizationResultMap" type="com.base.pojo.sys.Admin" extends="BaseResultMap">
+  	<association property="adminInfo" javaType="com.base.pojo.sys.AdminInfo" resultMap="com.base.dao.sys.AdminInfoMapper.BaseResultMap"/>
+  	<association property="department" javaType="com.base.pojo.sys.Department" resultMap="com.base.dao.sys.DepartmentMapper.BaseResultMap"/>
+  	<association property="role" javaType="com.base.pojo.sys.Role" resultMap="com.base.dao.sys.RoleMapper.BaseResultMap"/>
+  	<association property="job" javaType="com.base.pojo.sys.Job" resultMap="com.base.dao.sys.JobMapper.BaseResultMap"/>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    admin_id, admin_login_name, admin_login_password, admin_nick_name, role_id, 
+    department_id, job_id, admin_status,open_id
+  </sql>
+  <sql id="Customization_Column_List">
+  	admin.admin_id, 
+  	admin_login_name, 
+  	admin_login_password, 
+  	admin_nick_name, 
+  	admin_status,
+  	admin_name, 
+  	admin_sex, 
+  	admin_email, 
+  	admin_phone, 
+  	admin_addr,
+  	open_id,
+    department.department_id, 
+    department_name,
+    role.role_id, 
+    role_name, 
+    role_remark,
+    job.job_id, 
+    job_name
+  </sql>
+  <!-- 定制联接表 -->
+  <sql id="Customization_Join_Table">
+	 LEFT JOIN admin_info ON (admin.admin_id=admin_info.admin_id)
+	 LEFT JOIN department ON (admin.department_id=department.department_id)
+	 LEFT JOIN role ON (admin.role_id=role.role_id)
+	 LEFT JOIN job ON (admin.job_id=job.job_id)
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.base.example.sys.AdminExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <!-- 定制查询列表 -->
+  <select id="customizationSelectByExample" parameterType="com.base.example.sys.AdminExample" resultMap="customizationResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Customization_Column_List" />
+    from admin
+    <include refid="Customization_Join_Table"/>
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </select>
+  <!-- 定制查询 -->
+  <select id="customizationSelectByPrimaryKey" parameterType="java.lang.Integer" resultMap="customizationResultMap">
+    select 
+    <include refid="Customization_Column_List" />
+    from admin
+    <include refid="Customization_Join_Table"/>
+    where admin.admin_id = #{admin_id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.base.example.sys.AdminExample" >
+    delete from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.base.pojo.sys.Admin" >
+    insert into admin (admin_id, admin_login_name, admin_login_password, 
+      admin_nick_name, role_id, department_id, 
+      job_id, admin_status,open_id)
+    values (#{adminId,jdbcType=INTEGER}, #{adminLoginName,jdbcType=VARCHAR}, #{adminLoginPassword,jdbcType=VARCHAR}, 
+      #{adminNickName,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, 
+      #{jobId,jdbcType=INTEGER}, #{adminStatus,jdbcType=BIT},#{openId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.base.pojo.sys.Admin" useGeneratedKeys="true" keyProperty="adminId" >
+    insert into admin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="adminLoginName != null" >
+        admin_login_name,
+      </if>
+      <if test="adminLoginPassword != null" >
+        admin_login_password,
+      </if>
+      <if test="adminNickName != null" >
+        admin_nick_name,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="adminStatus != null" >
+        admin_status,
+      </if>
+      <if test="openId != null" >
+       open_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adminId != null" >
+        #{adminId,jdbcType=INTEGER},
+      </if>
+      <if test="adminLoginName != null" >
+        #{adminLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminLoginPassword != null" >
+        #{adminLoginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminNickName != null" >
+        #{adminNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="adminStatus != null" >
+        #{adminStatus,jdbcType=BIT},
+      </if>
+      <if test="openId != null" >
+        #{openId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.base.example.sys.AdminExample" resultType="java.lang.Integer" >
+    select count(*) from admin
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update admin
+    <set >
+      <if test="record.adminId != null" >
+        admin_id = #{record.adminId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminLoginName != null" >
+        admin_login_name = #{record.adminLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminLoginPassword != null" >
+        admin_login_password = #{record.adminLoginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adminNickName != null" >
+        admin_nick_name = #{record.adminNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null" >
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobId != null" >
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.adminStatus != null" >
+        admin_status = #{record.adminStatus,jdbcType=BIT},
+      </if>
+      <if test="record.adminStatus != null" >
+        admin_status = #{record.adminStatus,jdbcType=BIT},
+      </if>
+      <if test="record.openId != null" >
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update admin
+    set admin_id = #{record.adminId,jdbcType=INTEGER},
+      admin_login_name = #{record.adminLoginName,jdbcType=VARCHAR},
+      admin_login_password = #{record.adminLoginPassword,jdbcType=VARCHAR},
+      admin_nick_name = #{record.adminNickName,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      admin_status = #{record.adminStatus,jdbcType=BIT},
+      open_id = #{record.openId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.base.pojo.sys.Admin" >
+    update admin
+    <set >
+      <if test="adminLoginName != null" >
+        admin_login_name = #{adminLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminLoginPassword != null" >
+        admin_login_password = #{adminLoginPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="adminNickName != null" >
+        admin_nick_name = #{adminNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="adminStatus != null" >
+        admin_status = #{adminStatus,jdbcType=BIT},
+      </if>
+      <if test="openId != null" >
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.base.pojo.sys.Admin" >
+    update admin
+    set admin_login_name = #{adminLoginName,jdbcType=VARCHAR},
+      admin_login_password = #{adminLoginPassword,jdbcType=VARCHAR},
+      admin_nick_name = #{adminNickName,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      admin_status = #{adminStatus,jdbcType=BIT},
+      open_id = #{openId,jdbcType=VARCHAR}
+    where admin_id = #{adminId,jdbcType=INTEGER}
+  </update>
+  <!--批量设置角色ID部门ID职位ID为NULL-->
+	<update id="updatePropertyOfNull" parameterType="java.util.List">
+    	update admin
+	    <trim prefix="set" suffixOverrides=",">
+	        <trim prefix="role_id =case" suffix="end," >
+	            <foreach collection="list" item="item" index="index">
+	            	<if test="item.roleId!=null">
+	                    when admin_id=#{item.adminId,jdbcType=INTEGER} then role_id = null
+	                </if>
+	            </foreach>
+	        </trim>
+	        <trim prefix="department_id =case" suffix="end,">
+	            <foreach collection="list" item="item" index="index">
+	                 <if test="item.departmentId!=null">
+	                    when admin_id=#{item.departmentId,jdbcType=INTEGER} then department_id = null
+	                </if>
+	            </foreach>
+	        </trim>
+	        <trim prefix="job_id =case" suffix="end,">
+	            <foreach collection="list" item="item" index="index">
+	                 <if test="item.jobId!=null">
+	                    when admin_id=#{item.jobId,jdbcType=INTEGER} then job_id = null
+	                </if>
+	            </foreach>
+	        </trim>
+	    </trim>
+	    where
+	    <foreach collection="list" separator="or" item="item" index="index" >
+	        admin_id = #{item.adminId,jdbcType=INTEGER}
+	    </foreach>
+	</update>
+</mapper>
