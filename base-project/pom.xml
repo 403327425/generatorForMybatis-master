@@ -31,7 +31,7 @@
 		<mybatis-version>3.2.2</mybatis-version>
 		<mybatis-spring-version>1.2.2</mybatis-spring-version>
 		<log4j-version>1.2.17</log4j-version>
-		<mysql-connector-java-version>5.1.38</mysql-connector-java-version>
+		<mysql-connector-java-version>8.0.16</mysql-connector-java-version>
 		<spring-version>4.3.21.RELEASE</spring-version>
 		<servlet-jstl>1.2</servlet-jstl>
 		<standard>1.0.6</standard>
